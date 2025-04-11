@@ -1,4 +1,4 @@
-# Optimisation en Apprentissage Automatique (M2 IASD)
+# Optimisation en apprentissage automatique
 
 Ce projet explore plusieurs techniques d’optimisation fondamentales pour l’apprentissage automatique, à travers la régression linéaire et la factorisation matricielle (rang 1, rang faible, régularisée). L’objectif est d’analyser les effets de la surparamétrisation, de la régularisation et des méthodes de descente (batch vs stochastique) sur la qualité des solutions obtenues.
 
