@@ -7,41 +7,56 @@ Ce projet explore plusieurs techniques d’optimisation fondamentales pour l’a
 ## Contenu
 
 ### Régression linéaire
-- Formulation classique :  
-  $$
-  \min_{w \in \mathbb{R}} \frac{1}{2n} \|wx - y\|^2
-  $$
-- Formulation surparamétrée (matricielle) :  
-  $$
-  \min_{W \in \mathbb{R}^{n \times n}} \frac{1}{2n} \|Wx - y\|^2
-  $$
+- **Formulation classique** :  
+  Minimiser la fonction  
+  `f(w) = (1 / 2n) * ||w * x - y||^2`  
+  où `w` est un scalaire réel.
+
+- **Formulation surparamétrée (matricielle)** :  
+  Minimiser la fonction  
+  `f(W) = (1 / 2n) * ||W * x - y||^2`  
+  où `W` est une matrice carrée de taille `n x n`.
+
 - Comparaison entre solution analytique et optimisation par descente de gradient (GD).
 
 ---
 
-### Factorisation matricielle
-- Approximation de rang 1 :
-  $$
-  \min_{u \in \mathbb{R}^{n_1}, v \in \mathbb{R}^{n_2}} \frac{1}{2n} \|uv^\top - X\|_F^2
-  $$
-- Descente de gradient classique (GD) vs stochastique (SGD).
+### Factorisation matricielle (rang 1)
+- Approximation d’une matrice `X` par un produit de vecteurs :  
+  `X ≈ u * v^T`
+
+- Objectif :  
+  Minimiser  
+  `f(u, v) = (1 / 2n) * ||u * v^T - X||_F^2`  
+  où `||.||_F` désigne la norme de Frobenius.
+
+- Méthodes utilisées :  
+  - Descente de gradient (GD)  
+  - Descente de gradient stochastique (SGD)
+
 - Étude de l’effet de la taille de batch sur la convergence.
 
 ---
 
-### Factorisation matricielle de rang \( r \)
-- Approche généralisée :
-  $$
-  \min_{U \in \mathbb{R}^{n_1 \times r}, V \in \mathbb{R}^{n_2 \times r}} \frac{1}{2n} \|UV^\top - X\|_F^2
-  $$
-- Étude comparative GD / SGD pour différentes structures de rang.
+### Factorisation matricielle de rang r
+- Généralisation avec matrices `U` et `V` :
+  `X ≈ U * V^T` avec `U` de taille `(n1 x r)` et `V` de taille `(n2 x r)`
+
+- Objectif :  
+  Minimiser  
+  `f(U, V) = (1 / 2n) * ||U * V^T - X||_F^2`
+
+- Comparaison GD / SGD pour différentes valeurs de `r` et différents rangs de `X`.
 
 ---
 
 ### Factorisation régularisée
-- Formulation régularisée :
-  $$
-  \min_{U, V} \frac{1}{2n} \|UV^\top - X\|_F^2 + \frac{\lambda}{2} \|U\|_F^2 + \frac{\lambda}{2} \|V\|_F^2
-  $$
-- Étude de l’impact du paramètre de régularisation \( \lambda \) sur le rang effectif.
-- Comparaison des dynamiques d’optimisation GD vs SGD en présence de bruit.
+- Ajout d'une pénalité L2 sur les matrices `U` et `V`.
+
+- Formulation :  
+  Minimiser  
+  `f(U, V) = (1 / 2n) * ||U * V^T - X||_F^2 + (λ/2) * ||U||_F^2 + (λ/2) * ||V||_F^2`
+
+- Étude de l’impact du paramètre de régularisation `λ` sur le rang effectif.
+
+- Comparaison GD / SGD en présence de bruit.
